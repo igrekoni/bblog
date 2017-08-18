@@ -4,7 +4,7 @@
 {% block content %}
     <ul>
         {% for obj in object_list %}
-            <li>{{ obj.title }}</li>
+            <li>{{ obj.title }} || {{ obj.category }}</li>
         {% endfor %}
     </ul>
 {% endblock content %}
