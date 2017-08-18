@@ -1,8 +1,16 @@
+from datetime import timezone
+
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import pre_save
 from unidecode import unidecode
+from django.utils import timezone
 from django.utils.text import slugify
+
+
+class PostManager(models.Manager):
+    def active(self, *args, **kwargs):
+        return super(PostManager, self).filter(draft=False).filter(timezone)
 
 
 class SingleNews(models.Model):
@@ -25,6 +33,7 @@ class SingleNews(models.Model):
         (TR, u'Путешествия'),
     )
     category = models.CharField(max_length=40, choices=CATEGORY_CHOICES, default=CH)
+    objects = PostManager()
 
     def __unicode__(self):
         return self.title

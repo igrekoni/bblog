@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
 
@@ -14,6 +13,26 @@ def home(request):
     return render(request, template_name, context)
 
 
-class NewsListView(ListView):
+class MainListView(ListView):
     queryset = SingleNews.objects.all()
     template_name = 'index.html'
+
+
+class ChildListView(ListView):
+    queryset = SingleNews.objects.all().filter(category__iexact=u"Дети")
+    template_name = 'childs.html'
+
+
+class ThingsListView(ListView):
+    queryset = SingleNews.objects.all().filter(category__iexact=u"Вещи")
+    template_name = 'things.html'
+
+
+class HobbyListView(ListView):
+    queryset = SingleNews.objects.all().filter(category__iexact=u"Досуг")
+    template_name = 'hobby.html'
+
+
+class TravelListView(ListView):
+    queryset = SingleNews.objects.all().filter(category__iexact=u"Путешествия")
+    template_name = 'travel.html'
