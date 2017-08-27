@@ -2,8 +2,8 @@
 
 
 {% block content %}
-    <ul>
         {% for obj in object_list %}
+            <img src="{{ obj.image.url }}">
             <li>{{ obj.title }} || {{ obj.category }}</li>
         {% endfor %}
     </ul>
